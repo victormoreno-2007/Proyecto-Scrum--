@@ -19,7 +19,7 @@ def registrarUsuario():
                 print('correo invalido, intentelo de nuevo')
 
     def nombreDeseado():
-        nombredeseado=input('por favor ingrese el nombre con el cual quiere a\n')
+        nombredeseado=input('por favor ingrese el nombre con el cual quiere identificarte\n')
         return nombredeseado
 
     def contraseñaUsuario():
@@ -47,7 +47,7 @@ def registrarUsuario():
     }
 
     try:
-        with open('usuario.json','r',encoding='utf-8') as file:
+        with open('usuarios.json','r',encoding='utf-8') as file:
             datos = json.load(file)
     except FileNotFoundError:
         datos = []
