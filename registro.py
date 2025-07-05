@@ -1,49 +1,62 @@
 import re
 import getpass
 import datetime
+import json
 
-def nombre(nombre:str):
-    return nombre
+def registrarUsuario():
+    def nombreCompleto():
+        nombre = input('por favor ingrese su nombre completo:\n')
+        return nombre
 
-def validar_correo(correo: str) -> bool:
-    patron = r'^[\w\.-]+@[\w\.-]+\.\w+$'
-    return re.match(patron, correo) is not None
+    def validarCorreo():
+        while True:
+            correo = input('ingrese su correo\n')
+            patron = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+            if re.match(patron, correo):
+                print('correo valido')
+                return correo
+            else:
+                print('correo invalido, intentelo de nuevo')
 
-def nombredeseado(nombredeseado:str):
-    return nombredeseado
+    def nombreDeseado():
+        nombredeseado=input('por favor ingrese el nombre con el cual quiere a\n')
+        return nombredeseado
 
-def contraseña():
-    contraseña = getpass.getpass("Ingresa tu contraseña: ")
-    return '*'*len(contraseña)
+    def contraseñaUsuario():
+        clave = getpass.getpass("Ingresa tu contraseña: \n")
+        final = clave[-3:] if len(clave) >= 3 else clave
+        print('Contraseña recibida:' + '*' * (len(clave) - len(final)) + final)
+        return clave
 
-def fecha_hora():
-    return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    def fecha_hora():
+        return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-menu ='''1.nombre
-2.validar correo
-3.nombre deseado
-4contraseña
-5.fecha'''
+    nombre = nombreCompleto()
+    correo = validarCorreo()
+    nombreUsuario = nombreDeseado()
+    contraseña = contraseñaUsuario()
+    fecha = fecha_hora()
 
 
-while True:
-    print(menu)
-    opcion = int(input(' digite una opcion'))
-    if opcion == 1:
-        nombre1=input('escriba el nombre')
-        nom=nombre(nombre1)
-        print(f'su nombre es {nom}')
-    elif opcion==2:
-        correoes=input('escriba el correo')
-        vali=validar_correo(correoes)
-        print(f'su correo es {vali}')
-    elif opcion ==3:
-        nombredes=input('escriba su nombre deseado')
-        nomb=nombredeseado(nombredes)
-        print(f'su nombre deseado es {nomb}')
-    elif opcion==4:
-        cont=contraseña()
-        print(f'su contraseña es {cont}')
-    elif opcion == 5:
-        fecha_hora()
-       
+    informacion = {
+        'nombre':nombre,
+        'correo':correo,
+        'nombreUsuario': nombreUsuario,
+        'contraseña':contraseña,
+        'fecha':fecha
+    }
+
+    try:
+        with open('usuario.json','r',encoding='utf-8') as file:
+            datos = json.load(file)
+    except FileNotFoundError:
+        datos = []
+
+    datos.append(informacion)
+
+    with open('usuarios.json','w',encoding='utf-8') as file:
+        json.dump(datos,file, indent=4, ensure_ascii=False)
+
+    print('usuario registrado correctamente')
+
+registrarUsuario()
