@@ -59,4 +59,5 @@ def registrarUsuario():
 
     print('usuario registrado correctamente')
 
-registrarUsuario()
+if __name__ == "__main__":
+    registrarUsuario()
