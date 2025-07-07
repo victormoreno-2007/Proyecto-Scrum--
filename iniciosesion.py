@@ -38,7 +38,7 @@ def registrar_usuario():
     
     usuarios[usuario] = {
         "contraseña": contraseña,
-        "playlist": []
+        "playlists": {}  # Cambiamos a diccionario para múltiples playlists
     }
     guardar_usuarios(usuarios)
     print("Usuario registrado con éxito!")
@@ -52,21 +52,21 @@ def iniciar_sesion():
     
     if usuario in usuarios and usuarios[usuario]["contraseña"] == contraseña:
         print(f"¡Bienvenido, {usuario}!")
-        return usuario  # Devolvemos el nombre de usuario para usarlo después
+        return usuario
     else:
         print("Usuario o contraseña incorrectos.")
         return None
-    
-PlaylistMenu = """
-        Crear Playlist
 
-    1. Ver mi playlist
-    2. Agregar canción
-    3. Eliminar canción
+PlaylistMenu = """
+        Gestión de Playlists
+
+    1. Ver mis playlists
+    2. Crear nueva playlist
+    3. Seleccionar playlist
     4. Volver al menú principal
 """
 
-def menu_playlist(usuario_actual):
+def menu_playlists(usuario_actual):
     usuarios = cargar_usuarios()
     
     while True:
@@ -75,36 +75,115 @@ def menu_playlist(usuario_actual):
         opcion = input("Seleccione una opción:\n -> ")
         
         if opcion == "1":
-            print("\n--- Mis Canciones ---")
-            if not usuarios[usuario_actual]["playlist"]:
-                print("Tu playlist está vacía.")
+            print("\n--- Mis Playlists ---")
+            if not usuarios[usuario_actual]["playlists"]:
+                print("No tienes playlists creadas.")
             else:
-                for i, cancion in enumerate(usuarios[usuario_actual]["playlist"], 1):
-                    print(f"{i}. {cancion}")
+                for nombre, playlist in usuarios[usuario_actual]["playlists"].items():
+                    print(f"\n{nombre}:")
+                    if not playlist["canciones"]:
+                        print("  (vacía)")
+                    else:
+                        for i, cancion in enumerate(playlist["canciones"], 1):
+                            print(f"  {i}. {cancion}")
             ENTERContinuar()
 
         elif opcion == "2":
-            nueva_cancion = input("\nNombre de la canción a agregar: ")
-            usuarios[usuario_actual]["playlist"].append(nueva_cancion)
+            print("\n--- Crear nueva playlist ---")
+            nombre = input("Nombre de la nueva playlist: ")
+            
+            if nombre in usuarios[usuario_actual]["playlists"]:
+                print("Ya existe una playlist con ese nombre.")
+                ENTERContinuar()
+                continue
+                
+            usuarios[usuario_actual]["playlists"][nombre] = {
+                "canciones": [],
+                "descripcion": input("Descripción (opcional): ")
+            }
             guardar_usuarios(usuarios)
-            print(f"'{nueva_cancion}' ha sido agregada a tu playlist!")
+            print(f"Playlist '{nombre}' creada con éxito!")
             ENTERContinuar()
         
         elif opcion == "3":
-            if not usuarios[usuario_actual]["playlist"]:
+            if not usuarios[usuario_actual]["playlists"]:
+                print("No tienes playlists creadas. Crea una primero.")
+                ENTERContinuar()
+                continue
+                
+            print("\n--- Seleccionar playlist ---")
+            for i, nombre in enumerate(usuarios[usuario_actual]["playlists"].keys(), 1):
+                print(f"{i}. {nombre}")
+            
+            try:
+                num = int(input("Número de playlist a gestionar: "))
+                lista_playlists = list(usuarios[usuario_actual]["playlists"].keys())
+                if 1 <= num <= len(lista_playlists):
+                    playlist_seleccionada = lista_playlists[num-1]
+                    menu_gestion_playlist(usuario_actual, playlist_seleccionada)
+                else:
+                    print("Número inválido.")
+                    ENTERContinuar()
+            except ValueError:
+                print("Por favor ingrese un número válido.")
+                ENTERContinuar()
+        
+        elif opcion == "4":
+            break
+        
+        else:
+            print("Opción no válida. Intente nuevamente.")
+            ENTERContinuar()
+
+def menu_gestion_playlist(usuario_actual, nombre_playlist):
+    usuarios = cargar_usuarios()
+    playlist = usuarios[usuario_actual]["playlists"][nombre_playlist]
+
+    while True:
+
+        GestorPlaylist= f"""
+            Gestionando playlist: {nombre_playlist}
+                1. Ver canciones
+                2. Agregar canción
+                3. Eliminar canción
+                4. Volver al menú de playlists
+        """
+        
+        print(GestorPlaylist)
+        opcion = input("Seleccione una opción:\n -> ")
+        
+        if opcion == "1":
+            print(f"\n--- Canciones en '{nombre_playlist}' ---")
+            if not playlist["canciones"]:
+                print("Esta playlist está vacía.")
+            else:
+                for i, cancion in enumerate(playlist["canciones"], 1):
+                    print(f"{i}. {cancion}")
+            ENTERContinuar()
+        
+        elif opcion == "2":
+            nueva_cancion = input("\nNombre de la canción a agregar: ")
+            playlist["canciones"].append(nueva_cancion)
+            guardar_usuarios(usuarios)
+            print(f"'{nueva_cancion}' ha sido agregada a '{nombre_playlist}'!")
+            ENTERContinuar()
+        
+        elif opcion == "3":
+            if not playlist["canciones"]:
                 print("No hay canciones para eliminar.")
+                ENTERContinuar()
                 continue
                 
             print("\n--- Seleccione canción a eliminar ---")
-            for i, cancion in enumerate(usuarios[usuario_actual]["playlist"], 1):
+            for i, cancion in enumerate(playlist["canciones"], 1):
                 print(f"{i}. {cancion}")
             
             try:
                 num = int(input("Número de canción a eliminar: "))
-                if 1 <= num <= len(usuarios[usuario_actual]["playlist"]):
-                    cancion_eliminada = usuarios[usuario_actual]["playlist"].pop(num-1)
+                if 1 <= num <= len(playlist["canciones"]):
+                    cancion_eliminada = playlist["canciones"].pop(num-1)
                     guardar_usuarios(usuarios)
-                    print(f"'{cancion_eliminada}' ha sido eliminada de tu playlist.")
+                    print(f"'{cancion_eliminada}' ha sido eliminada de '{nombre_playlist}'.")
                 else:
                     print("Número inválido.")
             except ValueError:
@@ -135,7 +214,7 @@ def menu_principal():
         if opcion == "1":
             usuario_actual = iniciar_sesion()
             if usuario_actual:
-                menu_playlist(usuario_actual)
+                menu_playlists(usuario_actual)
         elif opcion == "2":
             registrar_usuario()
         elif opcion == "3":
