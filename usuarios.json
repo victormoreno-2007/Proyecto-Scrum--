@@ -1,0 +1,26 @@
+{
+    "Bayona325": {
+        "contrase\u00f1a": "Bayona325",
+        "playlists": {
+            "Favoritas": {
+                "descripcion": "Mis canciones preferidas",
+                "canciones": [
+                    "Henry Moodie - indigo",
+                    "Asi soy yo - Cuarteto de Nos",
+                    "Doom Crossing",
+                    "Forest Blakk - Fall Into Me",
+                    "Gold rush"
+                ]
+            },
+            "Musica Normal": {
+                "descripcion": "Musica que me gusta",
+                "canciones": [
+                    "A real life - greek fire",
+                    "Alan Sutton - No tengo hambre tengo ansiedad",
+                    "Born for this - The Score",
+                    "I'm sorry - Imagine Dragons"
+                ]
+            }
+        }
+    }
+}
