@@ -1,24 +1,22 @@
 {
-    "Bayona325": {
-        "contrase\u00f1a": "Bayona325",
+    "dario": {
+        "nombre": "dario",
+        "correo": "dario@gmail.com",
+        "nombreUsuario": "dario",
+        "contrase\u00f1a": "dario",
+        "fecha": "2025-07-08 12:33:59",
         "playlists": {
-            "Favoritas": {
-                "descripcion": "Mis canciones preferidas",
+            "playlist nueva": {
+                "descripcion": "descripcion de la nueva playlist",
                 "canciones": [
-                    "Henry Moodie - indigo",
-                    "Asi soy yo - Cuarteto de Nos",
-                    "Doom Crossing",
-                    "Forest Blakk - Fall Into Me",
-                    "Gold rush"
+                    "hola",
+                    "bebe"
                 ]
             },
-            "Musica Normal": {
-                "descripcion": "Musica que me gusta",
+            "nueva playlist 2": {
+                "descripcion": "descripcion de la segunda playlist",
                 "canciones": [
-                    "A real life - greek fire",
-                    "Alan Sutton - No tengo hambre tengo ansiedad",
-                    "Born for this - The Score",
-                    "I'm sorry - Imagine Dragons"
+                    "la mua"
                 ]
             }
         }

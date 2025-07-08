@@ -15,15 +15,15 @@ def enterParaContinuar(mensaje: str = "Enter para continuar"):
     input(mensaje)
 
 def menuPrincipal():
-    
     print(
-        '''
-█▀▄▀█ █░█ █▀ █ █▀▀ █░░ ▄▀█ █▄░█ █▀▄ █▀
-█░▀░█ █▄█ ▄█ █ █▄▄ █▄▄ █▀█ █░▀█ █▄▀ ▄█
+            '''
+    █▀▄▀█ █░█ █▀ █ █▀▀ █░░ ▄▀█ █▄░█ █▀▄ █▀
+    █░▀░█ █▄█ ▄█ █ █▄▄ █▄▄ █▀█ █░▀█ █▄▀ ▄█
 
-1. Iniciar sesion 
-2. Registrarse 
-'''
+    1. Iniciar sesion 
+    2. Registrarse 
+    '''
+
 )
 
 menuPrincipal()
@@ -38,3 +38,4 @@ elif opcion == 2:
     registrarUsuario()
 else:
     print('opcion invalida')
+

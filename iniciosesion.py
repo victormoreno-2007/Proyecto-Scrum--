@@ -1,6 +1,9 @@
 import json
 import getpass
-from verplaylist import verMisPlaylist
+from recomendacion import menuRecomendaciones
+from gestionCanciones import pas
+usuario = None
+
 
 def ENTERContinuar(Continuar="\nPresione ENTER para continuar\n -> "):
     input(Continuar)
@@ -34,14 +37,12 @@ def iniciar_sesion():
         print("Usuario o contraseña incorrectos.")
         return None
 
-PlaylistMenu = """
-        Gestión de Playlists
-
-    1. Ver mis playlists
-    2. Crear nueva playlist
-    3. Seleccionar playlist
-    4. Volver al menú principal
-"""
+def submenuPrincipal():
+        print("\n=== Submenú Principal ===")
+        print("1. Recomendación de cantantes")
+        print("2. Agregar o crear playlists")
+        print("3. Ver playlists")
+        print("4. Cerrar sesión")
 
 def crearPlaylist(usuario_actual):
     lista_canciones = []
@@ -73,48 +74,88 @@ def crearPlaylist(usuario_actual):
     print(f'su playlists {nombre_playlist} a sido creada exitosamente')
 
 
-
 def menu_playlists(usuario_actual):
-    usuarios = cargar_usuarios()
     
     while True:
-        print(PlaylistMenu)
+        submenuPrincipal()
         
         opcion = input("Seleccione una opción:\n -> ")
         
         if opcion == "1":
-            verMisPlaylist(usuario_actual)
+            menuRecomendaciones()
 
         elif opcion == "2":
             crearPlaylist(usuario_actual)
-        
+
         elif opcion == "3":
-            usuarios = cargar_usuarios()
-            
-            if not usuarios[usuario_actual]["playlists"]:
-                print("No tienes playlists creadas. Crea una primero.")
-                ENTERContinuar()
-                continue
+            def vertodasplaylist():
+                try:
+                    with open('usuarios.json', 'r') as file:
+                        informacion = json.load(file)
+
+                    for clave,nombre in informacion.items():
+                        print(f'usuario: {clave}')
+                        playlists = nombre.get('playlists', {})
+                        if playlists:
+                            print('playlist:')
+                            for nom_playlist in playlists:
+                                print(f'{nom_playlist}')
+
+                        else:
+                            print('aun no hay playlist registradas')
+                except FileNotFoundError:
+                    print('no se encontro el archivo usuarios.json')
+
+
+            def verMisPlaylist(usuario):
                 
-            print("\n--- Seleccionar playlist ---")
-            for i, nombre in enumerate(usuarios[usuario_actual]["playlists"].keys(), 1):
-                print(f"{i}. {nombre}")
+                try:
+                    with open('usuarios.json', 'r' )as file:
+                        informacion = json.load(file)
+
+                    if usuario in informacion:
+                        playlists = informacion[usuario].get('playlists', {})
+                        if playlists:
+                            print(f'playlists del usuario {usuario}')
+                            for nombre, contenido in playlists.items():
+                                print(f'{nombre}: {contenido["descripcion"]}')
+                        else:
+                            print('aun no tienes playlist')
+                    else:
+                        print('el usuario no existe')
+                        
+                except FileNotFoundError:
+                    print('no se encontro el archivo usuarios.json')
+            menu = '''
+            1. ver todas la playlist
+            2. ver mis playlist
+            3. ingresar a una playlist
+            4. salir'''
             
-            try:
-                num = int(input("Número de la playlist a gestionar: "))
-                lista_playlists = list(usuarios[usuario_actual]["playlists"].keys())
-                if 1 <= num <= len(lista_playlists):
-                    playlist_seleccionada = lista_playlists[num-1]
-                    menu_gestion_playlist(usuario_actual, playlist_seleccionada)
-                else:
-                    print("Número inválido.")
-                    ENTERContinuar()
-            except ValueError:
-                print("Por favor ingrese un número válido.")
-                ENTERContinuar()
-        
+            while True:
+                    print(menu)
+                    try:
+                        opcion = int(input('seleccione la accion a realizar\n'))
+                        if opcion == 1:
+                            vertodasplaylist()
+                        elif opcion == 2:
+                            verMisPlaylist(usuario_actual)
+                        elif opcion == 3:
+                            pass
+                        elif opcion == 4:
+                            break
+                        else:
+                            print('opcion no valida')
+                    except ValueError:
+                        print('error, verifique de nuevo')
         elif opcion == "4":
-            break
+            global usuario
+            if usuario is not None:
+                print('aun no hay sesion abierta')
+            else:
+                print('secion cerrada')
+                usuario = None
+                break
         
         else:
             print("Opción no válida. Intente nuevamente.")
@@ -183,31 +224,5 @@ def menu_gestion_playlist(usuario_actual, nombre_playlist):
             print("Opción no válida. Intente nuevamente.")
             ENTERContinuar()
 
-MenuPrincipal = """
-        Menú Principal
 
-    1. Iniciar sesión
-    2. Registrar nuevo usuario
-    3. Salir
-"""
 
-def menu_principal():
-    while True:
-        print(MenuPrincipal)
-        
-        opcion = input("Seleccione una opción:\n -> ")
-        
-        if opcion == "1":
-            usuario_actual = iniciar_sesion()
-            if usuario_actual:
-                menu_playlists(usuario_actual)
-        elif opcion == "2":
-            registrar_usuario()
-        elif opcion == "3":
-            print("Saliendo del sistema...")
-            break
-        else:
-            print("Opción no válida. Intente nuevamente.")
-
-if __name__ == "__main__":
-    menu_principal()
