@@ -1,0 +1,182 @@
+{
+  "generos": {
+    "pop": [
+      {
+        "nombre": "Taylor Swift",
+        "canciones": ["Love Story", "Blank Space", "Shake It Off", "Cruel Summer", "All Too Well"]
+      },
+      {
+        "nombre": "Ariana Grande",
+        "canciones": ["7 Rings", "Into You", "No Tears Left to Cry", "Thank U, Next", "Positions"]
+      },
+      {
+        "nombre": "Billie Eilish",
+        "canciones": ["Bad Guy", "Happier Than Ever", "Ocean Eyes", "Everything I Wanted", "Bury a Friend"]
+      },
+      {
+        "nombre": "Dua Lipa",
+        "canciones": ["Levitating", "Don't Start Now", "New Rules", "Physical", "Be the One"]
+      },
+      {
+        "nombre": "Harry Styles",
+        "canciones": ["As It Was", "Watermelon Sugar", "Sign of the Times", "Adore You", "Late Night Talking"]
+      }
+    ],
+    "rock": [
+      {
+        "nombre": "Coldplay",
+        "canciones": ["Yellow", "Fix You", "Viva La Vida", "The Scientist", "Paradise"]
+      },
+      {
+        "nombre": "Imagine Dragons",
+        "canciones": ["Radioactive", "Demons", "Believer", "Thunder", "Enemy"]
+      },
+      {
+        "nombre": "Foo Fighters",
+        "canciones": ["Everlong", "The Pretender", "Best of You", "Learn to Fly", "My Hero"]
+      },
+      {
+        "nombre": "Red Hot Chili Peppers",
+        "canciones": ["Californication", "Under the Bridge", "Scar Tissue", "Can't Stop", "Otherside"]
+      },
+      {
+        "nombre": "Paramore",
+        "canciones": ["Misery Business", "Still Into You", "Decode", "Ain't It Fun", "The Only Exception"]
+      }
+    ],
+    "regueton": [
+      {
+        "nombre": "Bad Bunny",
+        "canciones": ["Tití Me Preguntó", "Me Porto Bonito", "Callaíta", "Yonaguni", "DÁKITI"]
+      },
+      {
+        "nombre": "Karol G",
+        "canciones": ["Tusa", "Provenza", "Bichota", "Mi Cama", "Ahora Me Llama"]
+      },
+      {
+        "nombre": "Blessd",
+        "canciones": ["Medallo", "Quién TV", "Instagram Remix", "Dos Problemas", "Imposible (Remix)"]
+      },
+      {
+        "nombre": "J Balvin",
+        "canciones": ["Mi Gente", "Ginza", "Ay Vamos", "Safari", "Reggaeton"]
+      },
+      {
+        "nombre": "Rauw Alejandro",
+        "canciones": ["Todo de Ti", "Desesperados", "2/Catorce", "Punto 40", "Tattoo"]
+      }
+    ],
+    "r&b / soul": [
+      {
+        "nombre": "SZA",
+        "canciones": ["Kill Bill", "Good Days", "Snooze", "Love Galore", "Nobody Gets Me"]
+      },
+      {
+        "nombre": "Khalid",
+        "canciones": ["Location", "Talk", "Better", "Young Dumb & Broke", "Love Lies"]
+      },
+      {
+        "nombre": "Alicia Keys",
+        "canciones": ["Fallin'", "If I Ain't Got You", "No One", "Girl on Fire", "Empire State of Mind (Part II)"]
+      },
+      {
+        "nombre": "The Weeknd",
+        "canciones": ["Blinding Lights", "Save Your Tears", "Starboy", "The Hills", "Can't Feel My Face"]
+      },
+      {
+        "nombre": "Frank Ocean",
+        "canciones": ["Thinkin Bout You", "Pink + White", "Nights", "Ivy", "Lost"]
+      }
+    ],
+    "electronica": [
+      {
+        "nombre": "David Guetta",
+        "canciones": ["Titanium", "Hey Mama", "Play Hard", "Without You", "I'm Good (Blue)"]
+      },
+      {
+        "nombre": "Calvin Harris",
+        "canciones": ["Summer", "Feel So Close", "This Is What You Came For", "One Kiss", "Blame"]
+      },
+      {
+        "nombre": "Martin Garrix",
+        "canciones": ["Animals", "Scared to Be Lonely", "In the Name of Love", "High on Life", "There for You"]
+      },
+      {
+        "nombre": "Skrillex",
+        "canciones": ["Bangarang", "First of the Year", "Scary Monsters and Nice Sprites", "Make It Bun Dem", "Kyoto"]
+      },
+      {
+        "nombre": "Swedish House Mafia",
+        "canciones": ["Don't You Worry Child", "Save the World", "Miami 2 Ibiza", "Greyhound", "One"]
+      }
+    ],
+    "k-pop": [
+      {
+        "nombre": "BTS",
+        "canciones": ["Dynamite", "Butter", "Boy With Luv", "Fake Love", "Spring Day"]
+      },
+      {
+        "nombre": "BLACKPINK",
+        "canciones": ["DDU-DU DDU-DU", "Kill This Love", "How You Like That", "As If It's Your Last", "Pink Venom"]
+      },
+      {
+        "nombre": "TWICE",
+        "canciones": ["Fancy", "Feel Special", "Cheer Up", "TT", "What is Love?"]
+      },
+      {
+        "nombre": "Stray Kids",
+        "canciones": ["God's Menu", "Back Door", "Thunderous", "MANIAC", "S-Class"]
+      },
+      {
+        "nombre": "SEVENTEEN",
+        "canciones": ["Don't Wanna Cry", "Very Nice", "Rock With You", "HOT", "Super"]
+      }
+    ],
+    "rap / hip-hop": [
+      {
+        "nombre": "Drake",
+        "canciones": ["God's Plan", "Hotline Bling", "One Dance", "In My Feelings", "Started From the Bottom"]
+      },
+      {
+        "nombre": "Kendrick Lamar",
+        "canciones": ["HUMBLE.", "DNA.", "Alright", "Swimming Pools", "King Kunta"]
+      },
+      {
+        "nombre": "Eminem",
+        "canciones": ["Lose Yourself", "The Real Slim Shady", "Love the Way You Lie", "Without Me", "Not Afraid"]
+      },
+      {
+        "nombre": "Nicki Minaj",
+        "canciones": ["Super Bass", "Anaconda", "Starships", "Chun-Li", "Moment 4 Life"]
+      },
+      {
+        "nombre": "J. Cole",
+        "canciones": ["No Role Models", "Middle Child", "Power Trip", "Love Yourz", "G.O.M.D."]
+      }
+    ]
+  },
+   "topGlobal": [
+    "Bruno Mars",
+    "Lady Gaga",
+    "The Weeknd",
+    "Billie Eilish",
+    "Coldplay",
+    "Ariana Grande",
+    "Taylor Swift",
+    "Rihanna",
+    "Bad Bunny",
+    "Justin Bieber"
+  ],
+  "topColombia": [
+    "Feid",
+    "Bad Bunny",
+    "Blessd",
+    "Karol G",
+    "Myke Towers",
+    "Ryan Castro",
+    "Maluma",
+    "Rauw Alejandro",
+    "J Balvin",
+    "Shakira"
+  ]
+}
