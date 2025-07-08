@@ -29,24 +29,21 @@ def mostrarXGeneros(datos):
         print(f"\n Cantates recomendados en {buscadorGenero}")
         for i, singer in enumerate(cantantes, 1):
             print(f"{i}. {singer['nombre']}")
-        verCanciones = input(f"\n Quieres ver las mejores canciones de algun cantante? (si/no)").strip().lower()
+        verCanciones = input("\n¿Quieres ver las mejores canciones de alguno? (si/no):\n ").strip().lower()
         if verCanciones == "si":
-            numeroCantante = input("Selecciona el numero del cantante: ").strip()
-            if not numeroCantante.isdigit():
-                raise ValueError("Debes ingresa un numero valido") 
-            numeroCantante = int(numeroCantante)-1
-            if not (0<= numeroCantante < len(cantantes)):
-                raise IndexError("Numero invalido")
+            nombre = input("Escribe el nombre del cantante exactamente como aparece: ").strip()
+            cantanteEncontrado = next((a for a in cantantes if a["nombre"].lower() == nombre.lower()), None)
 
-            canciones = cantantes[numeroCantante].get("canciones", [])
-            print(f"\n Mejores caciones de {cantantes[verCanciones]['nombre']}:") 
-            for i,cancion in canciones:
-                print(f"{i}. {cancion}")
-
+            if cantanteEncontrado:
+                print(f"\n Mejores canciones de {cantanteEncontrado['nombre']}:")
+                for cancion in cantanteEncontrado["canciones"]:
+                    print(f"- {cancion}")
+            else:
+                print("Cantante no encontrado. Asegurate de escribirlo bien")
         elif verCanciones == "no":
-            print("Esta bien no se mostraran las canciones") 
+            print(" Entendido. No se mostraran canciones.")
         else:
-            print("Pusiste opcion invalida es si o no") 
+            print("Respuesta no reconocida. Por favor escribe 'si' o 'no'.")
     except ValueError as a:
         print(a)
     except IndexError as e:
@@ -56,12 +53,17 @@ def mostrarXGeneros(datos):
         
 #Funcion mostrar cantantes top globales mediante una lista        
 def mostrarTopGlobal(datos):
-    print("\n Top 10 cantantes globales: ")
-    for i, cantante in datos["topGlobal"]:
-        print(f" {i}. {cantante}")
+    print("\n Top 10 cantantes globales: \n")
+    for  cantante in datos["topGlobal"]:
+        print(f" {cantante}")
 
 #Funcion mostrar cantantes top colombia mediante una lista  
 def mostrarTopColombia(datos):
-    print("\n Top 10 cantantes colombia: ")
-    for i, cantante in datos["topColombia"]:
-        print(f"{i}. {cantante}")
+    print("\n Top 10 cantantes colombia: \n")
+    for  cantante in datos["topColombia"]:
+        print(f" {cantante}")
+
+
+        
+
+    
