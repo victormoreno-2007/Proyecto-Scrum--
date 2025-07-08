@@ -63,6 +63,38 @@ def mostrarTopColombia(datos):
     for  cantante in datos["topColombia"]:
         print(f" {cantante}")
 
+#Funcion de menu interactivo para recomendaciones
+
+def menuRecomendaciones():
+    archivo = leerJson()
+    while True:
+     print('''
+    Menu de recomenaciones de cantantes
+     
+     1.Ver recomendaciones de cantantes por genero
+     2.Ver lista de cantantes Top globales
+     3.Ver lista de cantantes Top colombia
+     4.Salir
+    ''')
+       
+     opcion= input(f"ingrese la opcion que desea: \n")
+
+     if opcion == "1":
+         mostrarXGeneros(archivo)
+     elif opcion == "2":
+         mostrarTopGlobal(archivo)
+     elif opcion == "3":
+         mostrarTopColombia(archivo)
+     elif opcion == "4":
+         print("Gracias por usar este menu")
+         break
+     else:
+         print("Ingrese una opcion valida ")
+
+
+if __name__ == "__main__":
+        menuRecomendaciones()
+
 
         
 
