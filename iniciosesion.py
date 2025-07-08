@@ -1,7 +1,9 @@
 import json
 import getpass
 from recomendacion import menuRecomendaciones
-from gestionCanciones import pas
+from gestionCanciones import menuPlaylist
+from main import limpiarConsola
+
 usuario = None
 
 
@@ -32,9 +34,13 @@ def iniciar_sesion():
     
     if usuario in usuarios and usuarios[usuario]["contraseña"] == contraseña:
         print(f"¡Bienvenido, {usuario}!")
+        ENTERContinuar()
+        limpiarConsola()
         return usuario
     else:
         print("Usuario o contraseña incorrectos.")
+        ENTERContinuar()
+        limpiarConsola()
         return None
 
 def submenuPrincipal():
@@ -141,7 +147,9 @@ def menu_playlists(usuario_actual):
                         elif opcion == 2:
                             verMisPlaylist(usuario_actual)
                         elif opcion == 3:
-                            pass
+                            verMisPlaylist(usuario_actual)
+                            nombre_playlist = input("Escribe el nombre de la playlist que deseas gestionar:\n-> ")
+                            menuPlaylist(usuario_actual, nombre_playlist)
                         elif opcion == 4:
                             break
                         else:

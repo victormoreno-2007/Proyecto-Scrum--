@@ -25,17 +25,25 @@ def menuPrincipal():
     '''
 
 )
-
-menuPrincipal()
-opcion = int(input("Ingresa la opcion\n"))
-if opcion == 1:
-    usuario_ingresado = iniciar_sesion()
-    if usuario_ingresado:
-        menu_playlists(usuario_ingresado)
-    else:
-        print('inicio de sesion fallida, presione enter para continuar...')
-elif opcion == 2:
-    registrarUsuario()
-else:
-    print('opcion invalida')
-
+while True:
+    try:
+        menuPrincipal()
+        opcion = int(input("Ingresa la opcion\n"))
+        if opcion == 1:
+            usuario_ingresado = iniciar_sesion()
+            if usuario_ingresado:
+                menu_playlists(usuario_ingresado)
+                break
+            else:
+                print('inicio de sesion fallida, presione enter para continuar...')
+        elif opcion == 2:
+            registrarUsuario()
+            break
+        else:
+            print('opcion invalida')
+            enterParaContinuar()
+            limpiarConsola()
+    except ValueError:
+        print('valor ingresado no es valido')
+        enterParaContinuar()
+        limpiarConsola()

@@ -25,7 +25,13 @@
             "nueva playlist 2": {
                 "descripcion": "descripcion de la segunda playlist",
                 "canciones": [
-                    "la mua"
+                    {
+                        "nombre": "la mua",
+                        "likes": 1
+                    }
+                ],
+                "comentarios": [
+                    "excelente cancion"
                 ]
             }
         }
