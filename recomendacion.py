@@ -56,6 +56,12 @@ def mostrarXGeneros(datos):
         
 #Funcion mostrar cantantes top globales mediante una lista        
 def mostrarTopGlobal(datos):
-    print("\n Top 10 cantantes globales:")
+    print("\n Top 10 cantantes globales: ")
     for i, cantante in datos["topGlobal"]:
         print(f" {i}. {cantante}")
+
+#Funcion mostrar cantantes top colombia mediante una lista  
+def mostrarTopColombia(datos):
+    print("\n Top 10 cantantes colombia: ")
+    for i, cantante in datos["topColombia"]:
+        print(f"{i}. {cantante}")
