@@ -33,7 +33,7 @@ if opcion == 1:
     if usuario_ingresado:
         menu_playlists(usuario_ingresado)
     else:
-        print('inicio de sesion fallida, precione enter para continuar...')
+        print('inicio de sesion fallida, presione enter para continuar...')
 elif opcion == 2:
     registrarUsuario()
 else:

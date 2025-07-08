@@ -3,14 +3,23 @@
         "nombre": "dario",
         "correo": "dario@gmail.com",
         "nombreUsuario": "dario",
-        "contrase\u00f1a": "dario",
+        "contraseña": "dario",
         "fecha": "2025-07-08 12:33:59",
         "playlists": {
             "playlist nueva": {
                 "descripcion": "descripcion de la nueva playlist",
                 "canciones": [
-                    "hola",
-                    "bebe"
+                    {
+                        "nombre": "hola",
+                        "likes": 1
+                    },
+                    {
+                        "nombre": "bebe",
+                        "likes": 1
+                    }
+                ],
+                "comentarios": [
+                    "Que playlist!!!!"
                 ]
             },
             "nueva playlist 2": {

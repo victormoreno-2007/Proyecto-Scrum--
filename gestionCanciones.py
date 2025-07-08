@@ -26,7 +26,8 @@ def mostrarCanciones(playlist):
     else:
         print("No hay canciones en esta playlist.")
 
-def darLikePorCancion(playlist):
+def darLikePorCancion(datos, usuario, nombrePlaylist):
+    playlist = datos[usuario]['playlists'][nombrePlaylist]
     canciones = playlist.get('canciones', [])
 
     if not canciones:
@@ -59,19 +60,18 @@ def darLikePorCancion(playlist):
     except ValueError:
         print("Entrada no válida. Por favor ingresa un número.")
 
-def comentarPlaylist(playlist):
+def comentarPlaylist(datos, usuario, nombrePlaylist):
+    playlist = datos[usuario]['playlists'][nombrePlaylist]
     comentario = input("Escribe tu comentario: ")
     comentarios = playlist.get('comentarios', [])
     comentarios.append(comentario)
     playlist['comentarios'] = comentarios
     print("Comentario agregado.")
 
-def menuPlaylist(nombrePlaylist):
+def menuPlaylist(usuario, nombrePlaylist):
     datos = cargarDatos()
-    playlist = datos.get('playlists', {}).get(nombrePlaylist)
-
-    if not playlist:
-        print(f"No se encontró la playlist '{nombrePlaylist}'.")
+    if usuario not in datos or nombrePlaylist not in datos[usuario]['playlists']:
+        print(f"No se encontró la playlist '{nombrePlaylist}' para el usuario '{usuario}'.")
         return
 
     while True:
@@ -84,12 +84,12 @@ def menuPlaylist(nombrePlaylist):
         opcion = input("Selecciona una opción: ")
 
         if opcion == '1':
-            mostrarCanciones(playlist)
+            mostrarCanciones(datos[usuario]['playlists'][nombrePlaylist])
         elif opcion == '2':
-            darLikePorCancion(playlist)
+            darLikePorCancion(datos, usuario, nombrePlaylist)
             guardarDatos(datos)
         elif opcion == '3':
-            comentarPlaylist(playlist)
+            comentarPlaylist(datos, usuario, nombrePlaylist)
             guardarDatos(datos)
         elif opcion == '4':
             break
@@ -97,5 +97,6 @@ def menuPlaylist(nombrePlaylist):
             print("Opción no válida. Intenta de nuevo.")
 
 if __name__ == "__main__":
+    usuario = input("Ingresa tu nombre de usuario: ")
     nombrePlaylist = input("Ingresa el nombre de la playlist que deseas abrir: ")
-    menuPlaylist(nombrePlaylist)
+    menuPlaylist(usuario, nombrePlaylist)
