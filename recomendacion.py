@@ -54,3 +54,8 @@ def mostrarXGeneros(datos):
     except Exception as ae:
         print(f"Upss, salio un error inesperado: {ae}")
         
+#Funcion mostrar cantantes top globales mediante una lista        
+def mostrarTopGlobal(datos):
+    print("\n Top 10 cantantes globales:")
+    for i, cantante in datos["topGlobal"]:
+        print(f" {i}. {cantante}")
