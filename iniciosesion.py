@@ -1,5 +1,6 @@
 import json
 import getpass
+from verplaylist import verMisPlaylist
 
 def ENTERContinuar(Continuar="\nPresione ENTER para continuar\n -> "):
     input(Continuar)
@@ -19,35 +20,11 @@ def guardar_usuarios(usuarios):
     with open('usuarios.json', 'w') as archivo:
         json.dump(usuarios, archivo, indent=4)
 
-def registrar_usuario():
-    usuarios = cargar_usuarios()
-    
-    print("\n--- Registro de nuevo usuario ---")
-    usuario = input("Nombre de usuario: ")
-    
-    if usuario in usuarios:
-        print("Este nombre de usuario ya existe.")
-        return
-    
-    contraseña = getpass.getpass("Contraseña: ")
-    confirmacion = getpass.getpass("Confirmar contraseña: ")
-    
-    if contraseña != confirmacion:
-        print("Las contraseñas no coinciden.")
-        return
-    
-    usuarios[usuario] = {
-        "contraseña": contraseña,
-        "playlists": {}  # Cambiamos a diccionario para múltiples playlists
-    }
-    guardar_usuarios(usuarios)
-    print("Usuario registrado con éxito!")
-
 def iniciar_sesion():
     usuarios = cargar_usuarios()
     
     print("\n--- Inicio de Sesión ---")
-    usuario = input("Nombre de usuario: ")
+    usuario = input("Nombre identificativo del usuario: ")
     contraseña = getpass.getpass("Contraseña: ")
     
     if usuario in usuarios and usuarios[usuario]["contraseña"] == contraseña:
@@ -66,6 +43,37 @@ PlaylistMenu = """
     4. Volver al menú principal
 """
 
+def crearPlaylist(usuario_actual):
+    lista_canciones = []
+
+    nombre_playlist = input('escriba el nombre de la nueva playlist\n')
+    descripcion = input('escriba la descripcion de su playlist, si desea omitir presione enter\n')
+    cantidad = int(input('digite la catidad de canciones que va a ingresar\n'))
+        
+    for i in range(cantidad):
+        cancion = input('escriba el nombre de la cancion\n')
+        lista_canciones.append(cancion)
+
+    try:
+        with open('usuarios.json', 'r' ) as file:
+            usuarios = json.load(file)
+    except FileNotFoundError:
+        usuarios = {}
+
+    if 'playlists' not in usuarios[usuario_actual]:
+        usuarios[usuario_actual]['playlists'] = {}
+
+    usuarios[usuario_actual]['playlists'][nombre_playlist] = {
+        'descripcion':descripcion,
+        'canciones':lista_canciones
+    }
+    with open('usuarios.json', 'w') as file:
+        json.dump(usuarios , file, indent=4)
+
+    print(f'su playlists {nombre_playlist} a sido creada exitosamente')
+
+
+
 def menu_playlists(usuario_actual):
     usuarios = cargar_usuarios()
     
@@ -75,37 +83,14 @@ def menu_playlists(usuario_actual):
         opcion = input("Seleccione una opción:\n -> ")
         
         if opcion == "1":
-            print("\n--- Mis Playlists ---")
-            if not usuarios[usuario_actual]["playlists"]:
-                print("No tienes playlists creadas.")
-            else:
-                for nombre, playlist in usuarios[usuario_actual]["playlists"].items():
-                    print(f"\n{nombre}:")
-                    if not playlist["canciones"]:
-                        print("  (vacía)")
-                    else:
-                        for i, cancion in enumerate(playlist["canciones"], 1):
-                            print(f"  {i}. {cancion}")
-            ENTERContinuar()
+            verMisPlaylist(usuario_actual)
 
         elif opcion == "2":
-            print("\n--- Crear nueva playlist ---")
-            nombre = input("Nombre de la nueva playlist: ")
-            
-            if nombre in usuarios[usuario_actual]["playlists"]:
-                print("Ya existe una playlist con ese nombre.")
-                ENTERContinuar()
-                continue
-                
-            usuarios[usuario_actual]["playlists"][nombre] = {
-                "canciones": [],
-                "descripcion": input("Descripción (opcional): ")
-            }
-            guardar_usuarios(usuarios)
-            print(f"Playlist '{nombre}' creada con éxito!")
-            ENTERContinuar()
+            crearPlaylist(usuario_actual)
         
         elif opcion == "3":
+            usuarios = cargar_usuarios()
+            
             if not usuarios[usuario_actual]["playlists"]:
                 print("No tienes playlists creadas. Crea una primero.")
                 ENTERContinuar()
@@ -116,7 +101,7 @@ def menu_playlists(usuario_actual):
                 print(f"{i}. {nombre}")
             
             try:
-                num = int(input("Número de playlist a gestionar: "))
+                num = int(input("Número de la playlist a gestionar: "))
                 lista_playlists = list(usuarios[usuario_actual]["playlists"].keys())
                 if 1 <= num <= len(lista_playlists):
                     playlist_seleccionada = lista_playlists[num-1]
@@ -134,6 +119,7 @@ def menu_playlists(usuario_actual):
         else:
             print("Opción no válida. Intente nuevamente.")
             ENTERContinuar()
+            
 
 def menu_gestion_playlist(usuario_actual, nombre_playlist):
     usuarios = cargar_usuarios()

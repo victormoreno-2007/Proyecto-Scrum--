@@ -1,5 +1,7 @@
 import os
 from registro import registrarUsuario
+from iniciosesion import iniciar_sesion, menu_playlists  
+
 
 #Funcion  limpiar consola 
 def limpiarConsola():
@@ -27,7 +29,12 @@ def menuPrincipal():
 menuPrincipal()
 opcion = int(input("Ingresa la opcion\n"))
 if opcion == 1:
-    pass
+    usuario_ingresado = iniciar_sesion()
+    if usuario_ingresado:
+        menu_playlists(usuario_ingresado)
+    else:
+        print('inicio de sesion fallida, precione enter para continuar...')
 elif opcion == 2:
-    if __name__ == "__main__":
-        registrarUsuario()
+    registrarUsuario()
+else:
+    print('opcion invalida')

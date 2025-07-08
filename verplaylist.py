@@ -26,11 +26,11 @@ def verMisPlaylist(usuario):
             informacion = json.load(file)
 
         if usuario in informacion:
-            plailists = informacion[usuario].get('playlist', {})
-            if plailists:
+            playlists = informacion[usuario].get('playlists', {})
+            if playlists:
                 print(f'playlists del usuario {usuario}')
-                for nombre, contenido in plailists.items():
-                    print(f'{nombre}: {contenido['descripcion']}')
+                for nombre, contenido in playlists.items():
+                    print(f'{nombre}: {contenido["descripcion"]}')
             else:
                 print('aun no tienes playlist')
         else:
