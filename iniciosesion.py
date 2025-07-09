@@ -2,11 +2,17 @@ import json
 import getpass
 from recomendacion import menuRecomendaciones
 from gestionCanciones import menuPlaylist
-from main import limpiarConsola
+
 
 usuario = None
 
 
+def limpiarConsola():
+    if os.name == 'nt':
+        os.system('cls')
+    else:
+        os.system('clear')
+        
 def ENTERContinuar(Continuar="\nPresione ENTER para continuar\n -> "):
     input(Continuar)
 
