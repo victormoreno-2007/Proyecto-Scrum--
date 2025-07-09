@@ -113,10 +113,16 @@ def menuRecomendaciones():
 
             if opcion == "1":
                 mostrarXGeneros(archivo)
+                enterParaContinuar()
+                limpiarConsola()
             elif opcion == "2":
                 mostrarTopGlobal(archivo)
+                enterParaContinuar()
+                limpiarConsola()
             elif opcion == "3":
                 mostrarTopColombia(archivo)
+                enterParaContinuar()
+                limpiarConsola()
             elif opcion == "4":
                 print("Gracias por usar este menu")
                 enterParaContinuar()
