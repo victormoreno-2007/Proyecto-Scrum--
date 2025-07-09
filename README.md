@@ -109,6 +109,8 @@ Desarrollamos una red social musical en Python con interfaz de consola, enfocada
 [Discord Nitro](https://cdn.discordapp.com/attachments/1391086022447599638/1391982904661250209/Captura_desde_2025-07-07_22-22-42.png)  
 *Nota: Discord requirió actualización a Nitro para videollamadas durante el desarrollo.*  
 
+## Presentacion Diapositivas
+[Presentacion](https://www.canva.com/design/DAGsoI2F2PQ/lyXhlOLdBLp3Gf-csVXYeA/edit?utm_content=DAGsoI2F2PQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 --- 
 
 **Repositorio:** [GitHub](https://github.com/victormoreno-2007/Proyecto-Scrum--)  
