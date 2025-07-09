@@ -33,12 +33,12 @@ while True:
             usuario_ingresado = iniciar_sesion()
             if usuario_ingresado:
                 menu_playlists(usuario_ingresado)
-                break
+                
             else:
                 print('inicio de sesion fallida, presione enter para continuar...')
         elif opcion == 2:
             registrarUsuario()
-            break
+           
         else:
             print('opcion invalida')
             enterParaContinuar()

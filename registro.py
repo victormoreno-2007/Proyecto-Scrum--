@@ -46,14 +46,6 @@ def registrarUsuario():
         'fecha':fecha,
         'playlists':{}
     }
-
-#    try:
-#       with open('usuarios.json','r',encoding='utf-8') as file:
-#          datos = json.load(file)
-# except FileNotFoundError:
-#    datos = {}
-
-#  datos.append(informacion)
     try:
         with open('usuarios.json', 'r',encoding='utf-8') as file:
             datos = json.load(file)

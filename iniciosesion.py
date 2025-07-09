@@ -1,3 +1,4 @@
+import os
 import json
 import getpass
 from recomendacion import menuRecomendaciones
@@ -12,13 +13,13 @@ def limpiarConsola():
         os.system('cls')
     else:
         os.system('clear')
-        
-def ENTERContinuar(Continuar="\nPresione ENTER para continuar\n -> "):
+
+def enterParaContinuar(Continuar="\nPresione ENTER para continuar\n -> "):
     input(Continuar)
 
 def cargar_usuarios():
     try:
-        with open('usuarios.json', 'r') as archivo:
+        with open('usuarios.json', 'r',encoding='utf-8') as archivo:
             return json.load(archivo)
     except FileNotFoundError:
         print("El archivo de usuarios no existe. Creando uno nuevo...")
@@ -28,26 +29,31 @@ def cargar_usuarios():
         return {}
 
 def guardar_usuarios(usuarios):
-    with open('usuarios.json', 'w') as archivo:
+    with open('usuarios.json', 'w',encoding='utf-8') as archivo:
         json.dump(usuarios, archivo, indent=4)
 
 def iniciar_sesion():
     usuarios = cargar_usuarios()
     
     print("\n--- Inicio de Sesión ---")
-    usuario = input("Nombre identificativo del usuario: ")
-    contraseña = getpass.getpass("Contraseña: ")
+    usuario = input("Nombre identificativo del usuario: ").strip()
+    contraseña = getpass.getpass("Contraseña: ").strip()
     
-    if usuario in usuarios and usuarios[usuario]["contraseña"] == contraseña:
-        print(f"¡Bienvenido, {usuario}!")
-        ENTERContinuar()
-        limpiarConsola()
-        return usuario
+    if usuario in usuarios:
+        user_data = usuarios[usuario] 
+        if "contraseña" in user_data and user_data["contraseña"] == contraseña:
+            print(f"¡Bienvenido, {usuario}!")
+            enterParaContinuar()
+            limpiarConsola()
+            return usuario
+        else:
+            print("Contraseña incorrecta.")
     else:
-        print("Usuario o contraseña incorrectos.")
-        ENTERContinuar()
-        limpiarConsola()
-        return None
+        print("Usuario no encontrado.")
+    
+    enterParaContinuar()
+    limpiarConsola()
+    return None
 
 def submenuPrincipal():
         print("\n=== Submenú Principal ===")
@@ -68,7 +74,7 @@ def crearPlaylist(usuario_actual):
         lista_canciones.append(cancion)
 
     try:
-        with open('usuarios.json', 'r' ) as file:
+        with open('usuarios.json', 'r',encoding='utf-8' ) as file:
             usuarios = json.load(file)
     except FileNotFoundError:
         usuarios = {}
@@ -80,7 +86,7 @@ def crearPlaylist(usuario_actual):
         'descripcion':descripcion,
         'canciones':lista_canciones
     }
-    with open('usuarios.json', 'w') as file:
+    with open('usuarios.json', 'w',encoding='utf-8') as file:
         json.dump(usuarios , file, indent=4)
 
     print(f'su playlists {nombre_playlist} a sido creada exitosamente')
@@ -102,7 +108,7 @@ def menu_playlists(usuario_actual):
         elif opcion == "3":
             def vertodasplaylist():
                 try:
-                    with open('usuarios.json', 'r') as file:
+                    with open('usuarios.json', 'r',encoding='utf-8') as file:
                         informacion = json.load(file)
 
                     for clave,nombre in informacion.items():
@@ -122,7 +128,7 @@ def menu_playlists(usuario_actual):
             def verMisPlaylist(usuario):
                 
                 try:
-                    with open('usuarios.json', 'r' )as file:
+                    with open('usuarios.json', 'r',encoding='utf-8' )as file:
                         informacion = json.load(file)
 
                     if usuario in informacion:
@@ -173,7 +179,7 @@ def menu_playlists(usuario_actual):
         
         else:
             print("Opción no válida. Intente nuevamente.")
-            ENTERContinuar()
+            enterParaContinuar()
             
 
 def menu_gestion_playlist(usuario_actual, nombre_playlist):
@@ -200,19 +206,19 @@ def menu_gestion_playlist(usuario_actual, nombre_playlist):
             else:
                 for i, cancion in enumerate(playlist["canciones"], 1):
                     print(f"{i}. {cancion}")
-            ENTERContinuar()
+            enterParaContinuar()
         
         elif opcion == "2":
             nueva_cancion = input("\nNombre de la canción a agregar: ")
             playlist["canciones"].append(nueva_cancion)
             guardar_usuarios(usuarios)
             print(f"'{nueva_cancion}' ha sido agregada a '{nombre_playlist}'!")
-            ENTERContinuar()
+            enterParaContinuar()
         
         elif opcion == "3":
             if not playlist["canciones"]:
                 print("No hay canciones para eliminar.")
-                ENTERContinuar()
+                enterParaContinuar()
                 continue
                 
             print("\n--- Seleccione canción a eliminar ---")
@@ -229,14 +235,14 @@ def menu_gestion_playlist(usuario_actual, nombre_playlist):
                     print("Número inválido.")
             except ValueError:
                 print("Por favor ingrese un número válido.")
-            ENTERContinuar()
+            enterParaContinuarr()
         
         elif opcion == "4":
             break
         
         else:
             print("Opción no válida. Intente nuevamente.")
-            ENTERContinuar()
+            enterParaContinuar()
 
 
 

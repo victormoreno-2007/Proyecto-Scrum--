@@ -4,36 +4,7 @@
         "correo": "dario@gmail.com",
         "nombreUsuario": "dario",
         "contraseña": "dario",
-        "fecha": "2025-07-08 12:33:59",
-        "playlists": {
-            "playlist nueva": {
-                "descripcion": "descripcion de la nueva playlist",
-                "canciones": [
-                    {
-                        "nombre": "hola",
-                        "likes": 1
-                    },
-                    {
-                        "nombre": "bebe",
-                        "likes": 1
-                    }
-                ],
-                "comentarios": [
-                    "Que playlist!!!!"
-                ]
-            },
-            "nueva playlist 2": {
-                "descripcion": "descripcion de la segunda playlist",
-                "canciones": [
-                    {
-                        "nombre": "la mua",
-                        "likes": 1
-                    }
-                ],
-                "comentarios": [
-                    "excelente cancion"
-                ]
-            }
-        }
+        "fecha": "2025-07-08 21:26:48",
+        "playlists": {}
     }
 }
