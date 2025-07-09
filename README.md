@@ -46,7 +46,7 @@ Desarrollamos una red social musical en Python con interfaz de consola, enfocada
 ---
 
 ### Sesión 3: Revisión (7/7/2025)  
-![Avance final](https://cdn.discordapp.com/attachments/1391086022447599638/1391982685122990211/image.png)  
+[Avance final](https://cdn.discordapp.com/attachments/1391086022447599638/1391982685122990211/image.png)  
 - Integración de módulos:  
   - `recomendacion.py`: Búsqueda por géneros.  
   - `gestionCanciones.py`: Likes y comentarios.  
