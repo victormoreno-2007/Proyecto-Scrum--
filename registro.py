@@ -2,7 +2,17 @@ import re
 import getpass
 import datetime
 import json
+import os
 
+def enterParaContinuar(Continuar="\nPresione ENTER para continuar\n -> "):
+    input(Continuar)
+
+def limpiarConsola():
+    if os.name == 'nt':
+        os.system('cls')
+    else:
+        os.system('clear')
+        
 def registrarUsuario():
     def nombreCompleto():
         nombre = input('por favor ingrese su nombre completo:\n').strip()
@@ -58,6 +68,8 @@ def registrarUsuario():
         json.dump(datos,file, indent=4, ensure_ascii=False)
 
     print('usuario registrado correctamente')
+    enterParaContinuar()
+    limpiarConsola()
 
 if __name__ == "__main__":
     registrarUsuario()

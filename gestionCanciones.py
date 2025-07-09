@@ -1,4 +1,13 @@
 import json
+import os
+def limpiarConsola():
+    if os.name == 'nt':
+        os.system('cls')
+    else:
+        os.system('clear')
+
+def enterParaContinuar(Continuar="\nPresione ENTER para continuar\n -> "):
+    input(Continuar)
 
 ARCHIVO = 'usuarios.json'
 
@@ -72,6 +81,8 @@ def menuPlaylist(usuario, nombrePlaylist):
     datos = cargarDatos()
     if usuario not in datos or nombrePlaylist not in datos[usuario]['playlists']:
         print(f"No se encontró la playlist '{nombrePlaylist}' para el usuario '{usuario}'.")
+        enterParaContinuar()
+        limpiarConsola()
         return
 
     while True:
@@ -85,13 +96,21 @@ def menuPlaylist(usuario, nombrePlaylist):
 
         if opcion == '1':
             mostrarCanciones(datos[usuario]['playlists'][nombrePlaylist])
+            enterParaContinuar()
+            limpiarConsola()
         elif opcion == '2':
             darLikePorCancion(datos, usuario, nombrePlaylist)
             guardarDatos(datos)
+            enterParaContinuar()
+            limpiarConsola()
         elif opcion == '3':
             comentarPlaylist(datos, usuario, nombrePlaylist)
             guardarDatos(datos)
+            enterParaContinuar()
+            limpiarConsola()
         elif opcion == '4':
+            enterParaContinuar()
+            limpiarConsola()
             break
         else:
             print("Opción no válida. Intenta de nuevo.")

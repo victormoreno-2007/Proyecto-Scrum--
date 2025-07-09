@@ -36,6 +36,8 @@ while True:
                 
             else:
                 print('inicio de sesion fallida, presione enter para continuar...')
+                enterParaContinuar()
+                limpiarConsola()
         elif opcion == 2:
             registrarUsuario()
            

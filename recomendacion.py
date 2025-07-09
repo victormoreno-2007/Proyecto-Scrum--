@@ -1,5 +1,14 @@
 import json
+import os
 
+def limpiarConsola():
+    if os.name == 'nt':
+        os.system('cls')
+    else:
+        os.system('clear')
+
+def enterParaContinuar(Continuar="\nPresione ENTER para continuar\n -> "):
+    input(Continuar)
 # Este el la direccion del archivo json donde estan los diccionarios
 archivoJson = 'informacionCantantes.json'
 
@@ -27,9 +36,21 @@ def mostrarXGeneros(datos):
                 buscadorGenero = input("Seleciona el genero por nombre: \n").strip()
                 if buscadorGenero not in generos:
                     raise ValueError("Genero no existe,ingresa de nuevo el genero")
+                    enterParaContinuar()
+                    limpiarConsola()
+                    print("Los géneros disponibles son:\n")
+                    for i, genero in enumerate(generos, 1):
+                        print(f"{i}. {genero}")
+                    continue
                 break     
             except (ValueError, Exception) as a:
                 print(f"Upss, salio un error inesperado: {a}")
+                enterParaContinuar()
+                limpiarConsola()
+                print("Los géneros disponibles son:\n")
+                for i, genero in enumerate(generos, 1):
+                    print(f"{i}. {genero}")
+                continue
                 
         cantantes = generos[buscadorGenero]
         print(f"\n Cantates recomendados en {buscadorGenero}")
@@ -46,15 +67,21 @@ def mostrarXGeneros(datos):
                         print(f"\n Mejores canciones de {cantanteEncontrado['nombre']}:")
                         for cancion in cantanteEncontrado["canciones"]:
                             print(f"- {cancion}")
+                            
                         break
                     else:
                         print("Cantante no encontrado. Asegurate de escribirlo bien")
+                        
                         break
             elif verCanciones == "no":
                 print(" Entendido. No se mostraran canciones.")
-                break
+                enterParaContinuar()
+                limpiarConsola()
+                return
+                
             else:
                 print("Respuesta no reconocida. Por favor escribe 'si' o 'no'.")
+                
             
             
     #Funcion mostrar cantantes top globales mediante una lista        
@@ -92,6 +119,8 @@ def menuRecomendaciones():
                 mostrarTopColombia(archivo)
             elif opcion == "4":
                 print("Gracias por usar este menu")
+                enterParaContinuar()
+                limpiarConsola()
                 break
             else:
                 print("Ingrese una opcion valida ")

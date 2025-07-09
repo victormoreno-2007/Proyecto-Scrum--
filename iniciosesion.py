@@ -25,7 +25,7 @@ def cargar_usuarios():
         print("El archivo de usuarios no existe. Creando uno nuevo...")
         return {}
     except json.JSONDecodeError:
-        print("Error al leer el archivo de usuarios. Verifica el formato.")
+        print("Error al leer el archivo de usuarios. puede ser que no exista ningun usuario aún.")
         return {}
 
 def guardar_usuarios(usuarios):
@@ -34,7 +34,10 @@ def guardar_usuarios(usuarios):
 
 def iniciar_sesion():
     usuarios = cargar_usuarios()
-    
+    if not usuarios:
+        print('no hay usuarios registrados aun. por favor registre uno primero')
+        return None
+
     print("\n--- Inicio de Sesión ---")
     usuario = input("Nombre identificativo del usuario: ").strip()
     contraseña = getpass.getpass("Contraseña: ").strip()
@@ -90,6 +93,8 @@ def crearPlaylist(usuario_actual):
         json.dump(usuarios , file, indent=4)
 
     print(f'su playlists {nombre_playlist} a sido creada exitosamente')
+    enterParaContinuar()
+    limpiarConsola()
 
 
 def menu_playlists(usuario_actual):
@@ -156,30 +161,49 @@ def menu_playlists(usuario_actual):
                         opcion = int(input('seleccione la accion a realizar\n'))
                         if opcion == 1:
                             vertodasplaylist()
+                            enterParaContinuar()
+                            limpiarConsola()
                         elif opcion == 2:
                             verMisPlaylist(usuario_actual)
+                            enterParaContinuar()
+                            limpiarConsola()
                         elif opcion == 3:
                             verMisPlaylist(usuario_actual)
+                            if not verMisPlaylist(usuario_actual):
+                                enterParaContinuar()
+                                limpiarConsola()
+                                continue
                             nombre_playlist = input("Escribe el nombre de la playlist que deseas gestionar:\n-> ")
                             menuPlaylist(usuario_actual, nombre_playlist)
+                            enterParaContinuar()
+                            limpiarConsola()
                         elif opcion == 4:
                             break
                         else:
                             print('opcion no valida')
+                            enterParaContinuar()
+                            limpiarConsola()
                     except ValueError:
                         print('error, verifique de nuevo')
+                        enterParaContinuar()
+                        limpiarConsola()
         elif opcion == "4":
             global usuario
             if usuario is not None:
                 print('aun no hay sesion abierta')
+                enterParaContinuar()
+                limpiarConsola()
             else:
                 print('secion cerrada')
                 usuario = None
+                enterParaContinuar()
+                limpiarConsola()
                 break
         
         else:
             print("Opción no válida. Intente nuevamente.")
             enterParaContinuar()
+            limpiarConsola()
             
 
 def menu_gestion_playlist(usuario_actual, nombre_playlist):
